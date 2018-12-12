@@ -12,10 +12,11 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyparser.urlencoded({extended:true}))
 app.use(bodyparser.json())
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/mongoScraper', {useNewUrlParser: true})
 
+const PORT = process.env.PORT ||3000
+app.listen(3000, () => console.log (`listening on: http://localhost:${PORT}` ))
 
 // require('./routes/apiRoutes')(app)
 
@@ -97,6 +98,3 @@ app.get("/articles/:id", function(req, res) {
 
 //     }
 // })
-
-const PORT = process.env.PORT ||3000
-app.listen(3000, () => console.log (`listening on: http://localhost:${PORT}` ))
